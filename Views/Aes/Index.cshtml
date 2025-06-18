@@ -1,0 +1,43 @@
+﻿@model Kriptoloji.Models.AesModel
+
+@{
+    ViewData["Title"] = "AES Şifreleme";
+}
+
+<h2>AES Şifreleme / Şifre Çözme</h2>
+
+<form asp-action="Index" method="post">
+    <div class="mb-3">
+        <label asp-for="PlainText" class="form-label">Metin (Şifrelenecek)</label>
+        <textarea asp-for="PlainText" class="form-control" rows="3"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="EncryptedText" class="form-label">Şifreli Metin (Çözülecek)</label>
+        <textarea asp-for="EncryptedText" class="form-control" rows="3"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Key" class="form-label">Anahtar</label>
+        <input asp-for="Key" class="form-control" type="text" />
+    </div>
+
+    <button type="submit" name="action" value="encrypt" class="btn btn-primary me-2">Şifrele</button>
+    <button type="submit" name="action" value="decrypt" class="btn btn-secondary">Şifre Çöz</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.EncryptedText) && Context.Request.Form["action"] == "encrypt")
+{
+    <div class="alert alert-success mt-3">
+        <strong>Şifrelenmiş Metin:</strong>
+        <pre>@Model.EncryptedText</pre>
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(Model.DecryptedText) && Context.Request.Form["action"] == "decrypt")
+{
+    <div class="alert alert-info mt-3">
+        <strong>Çözülmüş Metin:</strong>
+        <pre>@Model.DecryptedText</pre>
+    </div>
+}

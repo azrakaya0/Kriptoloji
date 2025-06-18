@@ -1,0 +1,24 @@
+﻿@model Kriptoloji.Models.Sha256Model
+
+@{
+    ViewData["Title"] = "SHA256 Özetleme";
+}
+
+<h2>SHA-256 Özetleme</h2>
+
+<form asp-action="Index" method="post">
+    <div class="mb-3">
+        <label asp-for="InputText" class="form-label">Metin</label>
+        <textarea asp-for="InputText" class="form-control" rows="3"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Özetle</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.HashedText))
+{
+    <div class="alert alert-primary mt-3">
+        <strong>SHA-256 Özeti:</strong>
+        <pre>@Model.HashedText</pre>
+    </div>
+}
